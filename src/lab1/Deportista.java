@@ -85,6 +85,7 @@ public class Deportista extends Persona{
                 }
             break;
         }
+        //hola
     }
     
     //a partir de los metodos heredados sobreescribir un metodo que verifique
