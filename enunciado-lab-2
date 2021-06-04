@@ -1,0 +1,37 @@
+A partir del laboratorio anterior crear dos Subclases que heredan de la clase Persona: la primera
+denominada Entrenador y la segunda denominada Deportista que poseen las siguientes
+características:
+Entrenador:
+- Experiencia laboral
+- Especialidad
+Deportista:
+- Ritmo cardíaco
+- Frecuencia de entrenamiento (diario, semanal). Validar que sólo sean estos dos valores.
+- Tipo de ejercicio (tonificación, reducción de peso, reducción de medidas, cardio, pesas,
+flexibilidad y equilibrio, relajación).
+Tanto la clase Entrenador como la Deportista tendrán dos constructores (con y sin parámetros).
+La clase Deportista deberá Sobrescribir el método calcularIMC() de la Clase Persona y calcular el
+porcentaje de grasa corporal. La fórmula para el porcentaje de grasa corporal es específica del
+género. Cuando sea necesario introducir un valor para el género, los hombres deben introducir el valor
+1 y las mujeres deben ingresar el valor cero. Para calcular el porcentaje de grasa corporal se utiliza la
+siguiente fórmula:
+Porcentaje de grasa corporal = (1,20*IMC) + (0,23*edad)-(10,8*sexo)-5,4
+Para las mujeres si el porcentaje de grasa corporal es menor al 25% se considera delgada, entre 25%
+y 30% es normal y más de 30% se considera un exceso de grasa corporal.
+En relación con los hombres si el porcentaje de grasa corporal es menor al 15% se considera
+delgadez, entre 15% y 20% es normal y más de 20% se considera un exceso de grasa corporal.
+A parte de los métodos heredados deberá tener un método que verifique si el ritmo cardíaco en reposo
+es alto (por encima de 100 pulsaciones) y en caso de serlo recomendar no realizar entrenamiento ese
+día.
+Piensa cuál debe ser el método Sobrescrito en este caso y elige apropiadamente, será parte de la
+evaluación.
+
+La clase Entrenador tendrá dos métodos Sobrecargados denominados
+determinarRutina(grasaCorpo,tipoEjer) el cual dependiendo del IMC del Deportista, porcentaje de
+grasa corporal y tipo de ejercicio (debes variar la solicitud de parámetros para garantizar la existencia
+de sobrecarga) dicho método sugerirá que rutina practicar (ejemplo, Yoga, Zumba, Bailoterapia etc) o
+cuales objetivos cumplir (ejemplo, pesas + Spinning, entre otros).
+Realiza las validaciones pertinentes y prueba los métodos. Es mejor que realices un menú de opciones
+para seleccionar cuando probar Deportista o cuando trabajar con Entrenador. Puedes tener formas de
+crear los objetos, por defecto o con datos proporcionados por el usuario, esto a fin de acelerar las
+pruebas una vez incorporados todos los métodos y validaciones posibles.
