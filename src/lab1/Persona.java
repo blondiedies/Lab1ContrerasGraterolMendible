@@ -17,6 +17,7 @@ public class Persona {
    protected  float peso;
    protected  float altura;
 
+   //CONSTRUCTOR CON PARAMETROS
     public Persona(int cedula, String nombre, int edad, char sexo, float peso, float altura) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -25,54 +26,64 @@ public class Persona {
         this.peso = peso;
         this.altura = altura;
     }
-    public Persona(){
-        this.cedula = 0;
-        this.nombre = "  ";
-        this.edad = 0;
-        this.sexo = ' ';
-        this.peso = 0;
-        this.altura = 0;
-    }
     
+    Scanner entrada = new Scanner(System.in);
+   //CONSTRUCTOR SIN PARAMETROS
+    public Persona(){
+        
+    }
+
+
     public int getCedula() {
         return cedula;
     }
+
     public void setCedula(int cedula) {
         this.cedula = cedula;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public int getEdad() {
         return edad;
     }
+
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
     public char getSexo() {
         return sexo;
     }
+
     public void setSexo(char sexo) {
         this.sexo = sexo;
     }
+
     public float getPeso() {
         return peso;
     }
+
     public void setPeso(float peso) {
         this.peso = peso;
     }
+
     public float getAltura() {
         return altura;
     }
+
     public void setAltura(float altura) {
         this.altura = altura;
     }
    
+    
     public void crearDatosPersona(){
-        Scanner entrada = new Scanner(System.in);
          System.out.println("\n");
         System.out.print("Indique la cedula de la persona: ");
         cedula= entrada.nextInt();
@@ -94,30 +105,39 @@ public class Persona {
         
         System.out.print("Indique el sexo de la persona: ");
         sexo = entrada.next().charAt(0);
-        this.comprobarSexo(sexo);
         entrada.nextLine();
-        
         
         System.out.print("Indique el peso de la persona: ");
         peso = entrada.nextFloat();
-        if((peso > 635)||(peso < 2)) {
-            do{
-            System.out.print("Introduzca un peso valido menor a 635: ");
-            peso= entrada.nextFloat();
-            }while ((peso > 635)||(peso<2));
-        }
+        comprobacion();
         entrada.nextLine();
         
         System.out.print("Indique la altura de la persona: ");
         altura = entrada.nextFloat();
-        if((altura > 2.72)||(altura<0.50) ){
+        comprobacion();
+        entrada.nextLine();
+    }
+    
+        public void comprobacion(){
+        boolean flag =false;
+         if(((getPeso() > 635)||(getPeso() < 2))&&(flag == false)) {
+            do{
+            System.out.print("Introduzca un peso valido menor a 635: ");
+            peso= entrada.nextFloat();
+            }while ((peso > 635)||(peso<2));
+            flag = true;
+        }
+             if(((getAltura() > 2.72)||(getAltura()<0.50))&& (flag == false)){
             do{
             System.out.print("Introduzca una altura valido menor a 2,72m o mayor a 1,00m: ");
             altura= entrada.nextFloat();
             }while ((altura > 2.72)||(altura < 0.50));
+            flag = true;
         }
-        entrada.nextLine();
     }
+    
+    
+    
     public void esMayorDeEdad(int edad){
         if (getEdad() < 18){
             System.out.println("Esta persona es menor de edad");
@@ -126,17 +146,17 @@ public class Persona {
         }
         
 
-    }  
+    }
+    
     public void comprobarSexo(char sexo){
         char M = 'M',F = 'F',m='m',f='f';
-        Scanner entrada = new Scanner(System.in);
-        if((sexo != m)||(sexo != f)||(sexo != F)||(sexo != M) ){
-            do{
-            System.out.print("Introduzca una caracter válido: ");
-            sexo = entrada.next().charAt(0);
-            }while ((sexo != m)||(sexo !=  f)||(sexo != F)||(sexo != M));
-        }
-    }    
+       if(( sexo== m)||(sexo== f)||(sexo==F)||(sexo==M)){
+           System.out.println("El sexo introducido es Correcto");
+       }else{
+        System.out.println("El sexo introducido es Incorrecto");
+    }
+    }
+    
     public void imprimirDatosPer(){
         System.out.println("\n");
         System.out.println("Datos de la persona\n");
@@ -146,7 +166,9 @@ public class Persona {
         System.out.println("Sexo: "+sexo);
         System.out.println("Peso: "+peso);
         System.out.println("Altura: "+altura);
-    } 
+    }
+   
+    
     public int calcularIMC(){
        float IMC = getPeso()/(getAltura()*getAltura());
         if( IMC < 18 )
@@ -157,5 +179,6 @@ public class Persona {
              return 1;
          else if ( IMC >41 )
              return 2; 
-      return -9; } 
+      return -9; }
+    
 }
