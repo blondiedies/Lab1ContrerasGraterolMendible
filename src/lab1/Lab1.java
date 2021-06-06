@@ -29,12 +29,13 @@ public class Lab1 {
         pers.imprimirDatosPer();
          pers.esMayorDeEdad(pers.getEdad());
         System.out.println("\n");
-        pers.comprobarSexo(pers.getSexo());
+        pers.comprobarSexo((char) pers.getSexo());
         
         
       
         Persona pers2 = new Persona();
         Entrenador trainer = new Entrenador();
+        Deportista deport = new Deportista();
        
        int opcion;
        Scanner entrada = new Scanner(System.in);
@@ -45,7 +46,9 @@ public class Lab1 {
         System.out.println("3. Consultar si el sexo introducido es correcto");
         System.out.println("4. Consultar si esta persona es mayor de edad");
         System.out.println("5. Calcular el IMC de la persona");
-        System.out.println("6. Salir");
+        System.out.println("6. Opciones Entrenador");
+        System.out.println("7. Opciones Deportista");
+        System.out.println("8. Salir");
         System.out.print("Elija una opcion: ");
         opcion = entrada.nextInt();
         
@@ -65,7 +68,8 @@ public class Lab1 {
                              case 2: trainer.crearDatosPersona();
                                      trainer.agregarDatosEntrenador();
                                      break;
-                             case 3: System.out.println("Deportista on creado todavia");
+                             case 3: deport.crearDatosPersona();
+                                     deport.agregarDatosDeportista();
                                      break;
                          }
                      }while (opcion != 4);
@@ -88,13 +92,14 @@ public class Lab1 {
                              case 2: trainer.imprimirDatosPer();
                                      trainer.imprimirDatosEntrenador();
                                      break;
-                             case 3: System.out.println("Deportista on creado todavia");
+                             case 3: deport.imprimirDatosPer();
+                                     deport.imprimirDatosDeportista();
                                      break;
                          }
                      }while (opcion != 4);
             break;
             
-            case 3: pers2.comprobarSexo(pers2.getSexo());
+            case 3: pers2.comprobarSexo((char) pers2.getSexo());
             break;
             
             case 4: pers2.esMayorDeEdad(pers2.getEdad());
@@ -103,9 +108,50 @@ public class Lab1 {
             case 5: int r; r=pers2.calcularIMC();
             System.out.println("el valor obtenido es: "+r);
             break;
+            
+            case 6: //opciones entrenador
+                opcion = -1;                                                            
+                    do{
+                      System.out.println("\n\nMENU ENTRENADOR"); 
+                      System.out.println("1. Determinar rutina para deportista");
+                      System.out.println("2. Determinar objetivos para deportista");
+                      System.out.println("3. Regresar al menu anterior");
+                      System.out.print("Elija una opcion: ");
+                      opcion = entrada.nextInt();
+                         switch (opcion){
+                             case 1: 
+                                 trainer.determinarRutina(deport.tipoEjerString(),deport.calcularIMC()); //rutina
+                                    break;
+                             case 2: 
+                                 trainer.determinarRutina(deport.calcularIMC(), deport.tipoEjerString()); //objetivos
+                                     break;
+                         }
+                     }while (opcion != 3);                
+            break;
+            
+            case 7: //opciones deportista
+                opcion = -1;                                                            
+                    do{
+                      System.out.println("\n\nMENU DEPORTISTA"); 
+                      System.out.println("1. Calcular porcentaje de grasa corporal");
+                      System.out.println("2. Verificar ritmo cardiaco");
+                      System.out.println("3. Regresar al menu anterior");
+                      System.out.print("Elija una opcion: ");
+                      opcion = entrada.nextInt();
+                         switch (opcion){
+                             case 1: 
+                                 deport.grasaCorp();
+                                    break;
+                             case 2: 
+                                 //metodo de verificar ritmo cardiaco aqui
+                                     break;
+                         }
+                     }while (opcion != 3);
+                
+            break;
         }
         
-        }while(opcion != 6);
+        }while(opcion != 8);
     
 }
 }

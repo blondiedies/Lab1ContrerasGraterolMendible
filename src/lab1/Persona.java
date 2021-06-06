@@ -13,7 +13,7 @@ public class Persona {
    protected int cedula;
    protected String nombre;
    protected  int edad;
-   protected  char sexo;
+   protected  char sexo; //0 mujer, 1 hombre
    protected  float peso;
    protected  float altura;
 
@@ -63,7 +63,7 @@ public class Persona {
     }
 
     public void setSexo(char sexo) {
-        this.sexo = sexo;
+        this.sexo=sexo;
     }
 
     public float getPeso() {
@@ -150,11 +150,24 @@ public class Persona {
     
     public void comprobarSexo(char sexo){
         char M = 'M',F = 'F',m='m',f='f';
-       if(( sexo== m)||(sexo== f)||(sexo==F)||(sexo==M)){
+       if(( sexo==m)||(sexo== f)||(sexo==F)||(sexo==M)){
            System.out.println("El sexo introducido es Correcto");
+           setSexo(sexo);
        }else{
         System.out.println("El sexo introducido es Incorrecto");
     }
+    }
+    
+    public int sexoNum(){
+        
+       //////
+       if ((getSexo()=='h')||(getSexo()=='H')){
+           return 1;
+        }
+       else if ((getSexo()=='m')||(getSexo()=='M')){
+           return 0;
+        }
+       return 0;
     }
     
     public void imprimirDatosPer(){
