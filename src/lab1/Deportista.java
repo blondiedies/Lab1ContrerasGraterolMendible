@@ -25,7 +25,11 @@ public class Deportista extends Persona{
     }
 
     //CONSTRUCTOR SIN PARAMETROS
-    public Deportista(){      
+    public Deportista(){     
+        super(); 
+        ritmoCardiaco = 0;
+        frecuenciaEntr = 0;
+        tipoEjercicio = 0;
     }
 //getset
 
@@ -152,7 +156,14 @@ public void imprimirDatosDeportista(){
     //a partir de los metodos heredados sobreescribir un metodo que verifique
     //si el ritmo cardiaco en reposo es alto (>100) y en ese caso
     //recomendar no realizar entrenamiento ese dia
-    
+
+    @Override
+    public void comprobacion(){
+        if (getRitmoCardiaco() > 100 )
+            System.out.print(" Es recomendado no realizar entrenamiento hoy");
+        else
+            System.out.print("No hay problema en que hoy haga su entrenamiento");
+    }
     
     }
 

@@ -143,7 +143,8 @@ public class Lab1 {
                                  deport.grasaCorp();
                                     break;
                              case 2: 
-                                 //metodo de verificar ritmo cardiaco aqui
+                                 deport.comprobacion();
+                                 
                                      break;
                          }
                      }while (opcion != 3);
