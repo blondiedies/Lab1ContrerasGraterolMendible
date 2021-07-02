@@ -1,24 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lab1;
 import java.util.Scanner;
-/**
- *
- * @author Eduardo Graterol
- */
-public class Persona {
-   protected int cedula;
-   protected String nombre;
-   protected  int edad;
-   protected  char sexo; //0 mujer, 1 hombre
-   protected  float peso;
-   protected  float altura;
 
-   //CONSTRUCTOR CON PARAMETROS
-    public Persona(int cedula, String nombre, int edad, char sexo, float peso, float altura) {
+class Persona {
+
+	protected int cedula;
+   	protected String nombre;
+   	protected  int edad;
+   	protected  char sexo; 
+   	protected  double peso;
+   	protected  double altura;
+   	Scanner entrada = new Scanner(System.in);
+   	Validaciones valido = new Validaciones();
+
+
+    public Persona(int cedula, String nombre, int edad, char sexo, double peso, double altura) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.edad = edad;
@@ -26,19 +22,14 @@ public class Persona {
         this.peso = peso;
         this.altura = altura;
     }
-    
-    Scanner entrada = new Scanner(System.in);
-   //CONSTRUCTOR SIN PARAMETROS
-    public Persona(){
-        
-    }
+    public Persona(){}
 
-
+    // GET & SET
     public int getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    protected void setCedula(int cedula) {
         this.cedula = cedula;
     }
 
@@ -46,7 +37,7 @@ public class Persona {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    protected void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -54,7 +45,7 @@ public class Persona {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    protected void setEdad(int edad) {
         this.edad = edad;
     }
 
@@ -62,118 +53,82 @@ public class Persona {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    protected void setSexo(char sexo) {
         this.sexo=sexo;
     }
 
-    public float getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    protected void setPeso(double peso) {
         this.peso = peso;
     }
 
-    public float getAltura() {
+    public double getAltura() {
         return altura;
     }
 
-    public void setAltura(float altura) {
+    protected void setAltura(double altura) {
         this.altura = altura;
     }
    
-    
-    public void crearDatosPersona(){
-         System.out.println("\n");
-        System.out.print("Indique la cedula de la persona: ");
-        cedula= entrada.nextInt();
-        entrada.nextLine();
-        
-        System.out.print("Indique el nombre de la persona: ");
-        nombre = entrada.nextLine();
+// OTROS METODOS
+    public void setDatosPersona(){
 
-      
-        System.out.print("Indique la edad de la persona: ");
-        edad = entrada.nextInt();
-        if((edad > 81) ||(edad< 12)){
-            do{
-            System.out.print("Introduzca una edad valida comprendida entre 12 y 81 años");
-            edad = entrada.nextInt();
-            }while ((edad>81)||(edad<12));
-        }
-        entrada.nextLine();
+    	int dato = 0;
+    	while(!valido.validar(9999999, 99999999, dato)){
+    		System.out.print("Indique la cedula de la persona entre 7 y 8 digitos: ");
+        	dato = entrada.nextInt();
+        	System.out.println("\n");
+    	}
+    	setCedula(dato);
         
-        System.out.print("Indique el sexo de la persona: ");
-        sexo = entrada.next().charAt(0);
-        entrada.nextLine();
+		while(!valido.validar(12, 85, dato)){
+    		System.out.print("Indique edad de la persona entre 12 y 85 años: ");
+        	dato = entrada.nextInt();
+        	System.out.println("\n");
+    	}
+    	setEdad(dato);
         
-        System.out.print("Indique el peso de la persona: ");
-        peso = entrada.nextFloat();
-        comprobacion();
-        entrada.nextLine();
+       	System.out.print("Indique nombre la persona: ");
+    	String dato1 = System.console().readLine();
+    	setNombre(dato1);
         
-        System.out.print("Indique la altura de la persona: ");
-        altura = entrada.nextFloat();
-        comprobacion();
-        entrada.nextLine();
-    }
-    
-        public void comprobacion(){
-        boolean flag =false;
-         if(((getPeso() > 635)||(getPeso() < 2))&&(flag == false)) {
-            do{
-            System.out.print("Introduzca un peso valido menor a 635: ");
-            peso= entrada.nextFloat();
-            }while ((peso > 635)||(peso<2));
-            flag = true;
-        }
-             if(((getAltura() > 2.72)||(getAltura()<0.50))&& (flag == false)){
-            do{
-            System.out.print("Introduzca una altura valido menor a 2,72m o mayor a 1,00m: ");
-            altura= entrada.nextFloat();
-            }while ((altura > 2.72)||(altura < 0.50));
-            flag = true;
-        }
-    }
-    
-    
-    
-    public void esMayorDeEdad(int edad){
-        if (getEdad() < 18){
-            System.out.println("Esta persona es menor de edad");
-        }else{
-            System.out.println("esta eprsona es mayor de edad");
-        }
-        
+        char dato2 = 't';
+        while(!valido.validar('F', 'M', dato2)){
+    		System.out.print("Indique sexo de la persona con una letra 'F' si es femenino y 'M' si es masculino: ");
+        	dato2 = entrada.next().charAt(0);
+        	System.out.println("\n");
+    	}
+    	setSexo(dato2);
 
+    	double dato3 = 0.0;
+    	while(!valido.validar(1.4, 2.5, dato3)){
+    		System.out.print("Indique altura de la persona entre '1.4' y '2.0' metros: ");
+        	dato3 = entrada.nextFloat();
+        	System.out.println("\n");
+    	}
+    	setAltura(dato3);
+
+        while(!valido.validar(40.0, 150.0, dato)){
+    		System.out.print("Indique peso de la persona entre '40.0' y '150.0' kg: ");
+        	dato3 = entrada.nextFloat();
+        	System.out.println("\n");
+    	}
+    	setPeso(dato3);
     }
-    
-    public void comprobarSexo(char sexo){
-        char M = 'M',F = 'F',m='m',f='f';
-       if(( sexo==m)||(sexo== f)||(sexo==F)||(sexo==M)){
-           System.out.println("El sexo introducido es Correcto");
-           setSexo(sexo);
-       }else{
-        System.out.println("El sexo introducido es Incorrecto");
+
+    public boolean esMayor(){
+        if (getEdad() < 18)
+            return false;
+        else
+            return true;
     }
-    }
-    
-    public int sexoNum(){
-        
-       //////
-       if ((getSexo()=='h')||(getSexo()=='H')){
-           return 1;
-        }
-       else if ((getSexo()=='m')||(getSexo()=='M')){
-           return 0;
-        }
-       return 0;
-    }
-    
+
     public void imprimirDatosPer(){
-        System.out.println("\n");
         System.out.println("Datos de la persona\n");
-        System.out.println("Cedual: "+cedula);
+        System.out.println("Cedula: "+cedula);
         System.out.println("Nombre: "+nombre);
         System.out.println("Edad: "+edad);
         System.out.println("Sexo: "+sexo);
@@ -181,17 +136,15 @@ public class Persona {
         System.out.println("Altura: "+altura);
     }
    
-    
     public int calcularIMC(){
-       float IMC = getPeso()/(getAltura()*getAltura());
-        if( IMC < 18 )
-             return -1;
-        else if ( IMC < 25 )
-             return 0;
-         else if ( IMC < 35 )
-             return 1;
-         else if ( IMC >41 )
-             return 2; 
-      return -9; }
-    
+       int IMC = (int) (getPeso()/(getAltura()*getAltura()));
+       if( IMC < 18)
+    		return -1;
+    	else if( IMC < 25)
+    		return 0;
+    	else if ( IMC < 35)
+    		return 1;
+    	else
+    		return 2;
+    }
 }

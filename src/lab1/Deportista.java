@@ -1,43 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package lab1;
 
-/**
- *
- * @author captain trouble
- */
+package lab1;
+import java.util.Scanner;
+
 public class Deportista extends Persona{
     private int ritmoCardiaco;
-    private int frecuenciaEntr; //1=diario, 2=semanal
-    private int tipoEjercicio; 
-    /*1=tonificacion,2=redux peso,3=redux medidas,4=cardio,
-    5=pesas,6=flexibilidad y equilibrio,7=relajacion*/
+    private int frecuenciaEntr;
+    private int tipoEjercicio;
+    Scanner entrada = new Scanner(System.in);
+    Validaciones valido = new Validaciones(); 
 
-//CONSTRUCTOR CON PARAMETROS
-    public Deportista (int ritmoCardiaco, int frecuenciaEntr, int tipoEjercicio, int cedula, String nombre, int edad, char sexo, float peso, float altura) {
+    public Deportista (int ritmoCardiaco, int frecuenciaEntr, int tipoEjercicio, int cedula, String nombre, int edad, char sexo, double peso, double altura) {
         super(cedula, nombre, edad, sexo, peso, altura);
         this.ritmoCardiaco = ritmoCardiaco;
         this.frecuenciaEntr = frecuenciaEntr;
         this.tipoEjercicio = tipoEjercicio;
     }
 
-    //CONSTRUCTOR SIN PARAMETROS
     public Deportista(){     
-        super(); 
-        ritmoCardiaco = 0;
-        frecuenciaEntr = 0;
-        tipoEjercicio = 0;
+
     }
-//getset
+
 
     public int getRitmoCardiaco() {
         return ritmoCardiaco;
     }
 
-    public void setRitmoCardiaco(int ritmoCardiaco) {
+    private void setRitmoCardiaco(int ritmoCardiaco) {
         this.ritmoCardiaco = ritmoCardiaco;
     }
 
@@ -45,7 +33,7 @@ public class Deportista extends Persona{
         return frecuenciaEntr;
     }
 
-    public void setFrecuenciaEntr(int frecuenciaEntr) {
+    private void setFrecuenciaEntr(int frecuenciaEntr) {
         this.frecuenciaEntr = frecuenciaEntr;
     }
 
@@ -53,22 +41,35 @@ public class Deportista extends Persona{
         return tipoEjercicio;
     }
 
-    public void setTipoEjercicio(int tipoEjercicio) {
+    private void setTipoEjercicio(int tipoEjercicio) {
         this.tipoEjercicio = tipoEjercicio;
     }
     
-    //metodo sobreescrito calcularIMC()
-    public int calcularIMC(){
-        //calcula porcentaje de grasa corporal
-        int IMC=super.calcularIMC();
-        return (int) ((1.2*IMC)+(0.23*getEdad())-(10.8*sexoNum())-5.4);
-        }
-    
-    public void grasaCorp(){
-        System.out.println("Grasa corporal: "+calcularIMC());
-        switch (sexoNum()){
 
-            case 0: //mujer
+    @Override
+    public int calcularIMC(){
+        int IMC = (int) (getPeso()/(getAltura()*getAltura()));
+        if(getSexo() == 'M'|| getSexo() == 'm')
+        	return (int) ((1.2*IMC)+(0.23*getEdad())-10.8-5.4);
+        else 
+        	return (int) ((1.2*IMC)+(0.23*getEdad())-5.4);
+    }
+    
+    @Override
+    public boolean esMayor(){
+    	if(getRitmoCardiaco() > 100){
+    		System.out.println("No es recomendable entrenar hoy");
+    		return true;
+ 		}
+ 		else
+ 			return false;
+    }
+    public void imprimirGrasaCorp(){
+        System.out.println("Grasa corporal: "+ calcularIMC());
+        switch (getSexo()){
+
+            case 'F': 
+            case 'f':
                 if (calcularIMC()<25){
                     System.out.println("Delgada");
                 }
@@ -79,9 +80,11 @@ public class Deportista extends Persona{
                     System.out.println("Normal");
                 }
             break;
-            case 1://onvre
+
+            case 'M':
+            case 'm':
                 if (calcularIMC()<15){
-                    System.out.println("Delgada");
+                    System.out.println("Delgado");
                 }
                 else if (calcularIMC()>20){
                     System.out.println("Exceso de grasa corporal");
@@ -93,77 +96,73 @@ public class Deportista extends Persona{
         }
 
     }
-//usar este metodo con determinarRutina() y rutina()
-public String tipoEjerString(){
-    switch(this.tipoEjercicio){
-        case 1: return "tonificacion";
-        case 2: return "redux peso";
-        case 3: return "redux medidas";
-        case 4: return "cardio";
-        case 5: return "pesas";
-        case 6: return "flexibilidad"; 
-        case 7: return "relajacion";
-        default: return "";
-    }
-}   
 
-public void agregarDatosDeportista(){
-        System.out.print("introduzca su ritmo cardiaco: ");
-        ritmoCardiaco = entrada.nextInt();
-      
-        
-        System.out.println("introduzca su frecuencia de entrenamiento: ");
-        System.out.println("(1=diario, 2=semanal)");
-        int a=entrada.nextInt();
-        while ((a!=1)&&(a!=2)){
-        System.out.println("Frecuencia invalida, intente de nuevo");
-        a=entrada.nextInt();
-        }
-        frecuenciaEntr = a;
-     
-        System.out.println("introduzca su tipo de ejercicio:");
-        System.out.println("1=tonificacion,2=redux peso,3=redux medidas,4=cardio,");
-        System.out.println("5=pesas,6=flexibilidad y equilibrio,7=relajacion");
-        a=entrada.nextInt();
-        while ((a!=1)&&(a!=2)&&(a!=3)&&(a!=4)&&(a!=5)&&(a!=6)&&(a!=7)){
-        System.out.println("tipo invalida, intente de nuevo");
-        a=entrada.nextInt();
-        }
-        frecuenciaEntr = a;
-        
-   }
+	public String tipoEjerString(){
+		switch(getTipoEjercicio()){
+	        case 1: return "tonificacion";
+	        case 2: return "redux peso";
+	        case 3: return "redux medidas";
+	        case 4: return "cardio";
+	        case 5: return "pesas";
+	        case 6: return "flexibilidad"; 
+	        case 7: return "relajacion";
+	        default: return "";
+	    }
+	}   
 
-public void imprimirDatosDeportista(){
+	public void setDatosDeportista(){
+		    
+		setDatosPersona();
+
+		int dato = 0;
+    	while(!valido.validar(40, 120, dato)){
+    		System.out.print("Indique la frecuencia cardiaca de la persona entre 40 y 120 lpm");
+        	dato = entrada.nextInt();
+        	System.out.println("\n");
+    	}
+    	setRitmoCardiaco(dato);
+		    
+    	while(!valido.validar(1, 2, dato)){
+    		System.out.print("Indique la frecuencia de entrenamiento 1 que corresponde a diaria y 2 que corresponde a semanal");
+        	dato = entrada.nextInt();
+        	System.out.println("\n");
+    	}
+    	setFrecuenciaEntr(dato);        
+
+    	dato = 0;
+		while(!valido.validar(1, 7, dato)){
+    		System.out.println("Indique número correspondiente a el tipo de ejercicio:");
+    		System.out.println("1. Tonificacion");
+    		System.out.println("2. Reducción de peso");
+    		System.out.println("3. Reducción de medidas");
+    		System.out.println("4. Cardiovascular");
+    		System.out.println("5. Ejercicios de Fuerza");
+    		System.out.println("6. Ejercicios de flexibilidad y equilibrio");
+    		System.out.println("7. Ejercicios de relajación");
+        	dato = entrada.nextInt();
+        	System.out.println("\n");
+    	}
+    	setTipoEjercicio(dato);            	       	
+	}
+
+	public void imprimirDatosDeportista(){
+		    
+		imprimirDatosPer();
         System.out.println("Ritmo Cardiaco: "+ritmoCardiaco);
-        
-        String freq;
-        switch (frecuenciaEntr){
+    
+        switch (getFrecuenciaEntr()){
             case 1:
-                freq="Diaria";
+                System.out.println("Frecuencia de entrenamiento diaria");
                 break;
             case 2:
-                freq="Semanal";
+                System.out.println("Frecuencia de entrenamiento semanal");
                 break; 
             default:
-                freq="N/A";
+                break;
         }
-        System.out.println("Frecuencia de entrenamiento: "+freq);
 
-        System.out.println("Tipo de ejercicio: "+tipoEjerString());
+        System.out.println("Tipo de ejercicio: "+tipoEjerString());	        
+	}
 
-        
+		
 }
-    //a partir de los metodos heredados sobreescribir un metodo que verifique
-    //si el ritmo cardiaco en reposo es alto (>100) y en ese caso
-    //recomendar no realizar entrenamiento ese dia
-
-    @Override
-    public void comprobacion(){
-        if (getRitmoCardiaco() > 100 )
-            System.out.print(" Es recomendado no realizar entrenamiento hoy");
-        else
-            System.out.print("No hay problema en que hoy haga su entrenamiento");
-    }
-    
-    }
-
