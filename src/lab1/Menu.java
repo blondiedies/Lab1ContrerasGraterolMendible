@@ -59,10 +59,10 @@ class Menu{
 		}
 		switch (opcion){
 			case 2:
-				deportista.imprimirDatosDeportista();
+				deportista.imprimirDatosPer();
 				break;
 			case 1:
-				entrenador.imprimirDatosEntrenador();
+				entrenador.imprimirDatosPer();
 				break;
 			default:
 				break;

@@ -52,9 +52,15 @@ public class Entrenador extends Persona{
         
    	}
        
-    public void imprimirDatosEntrenador(){
-        imprimirDatosPer();
-
+    @Override
+    public void imprimirDatosPer(){
+        System.out.println("Datos de la persona\n");
+        System.out.println("Cedula: "+cedula);
+        System.out.println("Nombre: "+nombre);
+        System.out.println("Edad: "+edad);
+        System.out.println("Sexo: "+sexo);
+        System.out.println("Peso: "+peso);
+        System.out.println("Altura: "+altura);
         System.out.println("Experiencia Laboral: "+experienciaLaboral);
         System.out.println("Especialidad: "+especialidad);
     }
@@ -93,5 +99,11 @@ public class Entrenador extends Persona{
 
     void imprimirDatosDeportista() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public String retornarInfo(){
+        String temp="Datos de la persona:<br>Cedula: "+cedula+"<br>Nombre: "+nombre+"<br>Edad: "+edad+"<br>Sexo: "+sexo+"<br>Peso: "+peso+"<br>Altura: "+altura+"<br>Exp. Laboral: "+experienciaLaboral+"<br>Especialidad: "+especialidad+"<br>------<br>";
+        return temp;
     }
 }

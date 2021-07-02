@@ -145,11 +145,16 @@ public class Deportista extends Persona{
     	setTipoEjercicio(dato);            	       	
 	}
 
-	public void imprimirDatosDeportista(){
-		    
-		imprimirDatosPer();
+    @Override
+	public void imprimirDatosPer(){
+        System.out.println("Datos de la persona\n");
+        System.out.println("Cedula: "+cedula);
+        System.out.println("Nombre: "+nombre);
+        System.out.println("Edad: "+edad);
+        System.out.println("Sexo: "+sexo);
+        System.out.println("Peso: "+peso);
+        System.out.println("Altura: "+altura);
         System.out.println("Ritmo Cardiaco: "+ritmoCardiaco);
-    
         switch (getFrecuenciaEntr()){
             case 1:
                 System.out.println("Frecuencia de entrenamiento diaria");
@@ -164,5 +169,11 @@ public class Deportista extends Persona{
         System.out.println("Tipo de ejercicio: "+tipoEjerString());	        
 	}
 
+    @Override
+         public String retornarInfo(){
+        String temp="Datos de la persona:<br>Cedula: "+cedula+"<br>Nombre: "+nombre+"<br>Edad: "+edad+"<br>Sexo: "+sexo+"<br>Peso: "+peso+"<br>Altura: "+altura+"<br>Ritmo Cardiaco: "+ritmoCardiaco+"<br>Freq. Entrenamiento: "+frecuenciaEntr+"<br>Tipo de Ejercicio: "+tipoEjercicio+"<br>------<br>";
+        return temp;
+    }
+        
 		
 }

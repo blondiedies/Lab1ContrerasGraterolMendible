@@ -2,7 +2,7 @@
 package lab1;
 import java.util.Scanner;
 
-class Persona {
+public abstract class Persona {
 
 	protected int cedula;
    	protected String nombre;
@@ -120,10 +120,7 @@ class Persona {
     }
 
     public boolean esMayor(){
-        if (getEdad() < 18)
-            return false;
-        else
-            return true;
+            return getEdad() >= 18;
     }
 
     public void imprimirDatosPer(){
@@ -147,4 +144,10 @@ class Persona {
     	else
     		return 2;
     }
+    
+        public String retornarInfo(){
+        String temp="Datos de la persona:<br>Cedula: "+cedula+"<br>Nombre: "+nombre+"<br>Edad: "+edad+"<br>Sexo: "+sexo+"<br>Peso: "+peso+"<br>Altura: "+altura+"<br>------<br>";
+        return temp;
+    }
+    
 }
