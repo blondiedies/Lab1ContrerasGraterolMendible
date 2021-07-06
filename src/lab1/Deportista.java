@@ -48,9 +48,9 @@ public class Deportista extends Persona{
 
     @Override
     public int calcularIMC(){
-        int IMC = (int) (getPeso()/(getAltura()*getAltura()));
-        if(getSexo() == 'M'|| getSexo() == 'm')
-        	return (int) ((1.2*IMC)+(0.23*getEdad())-10.8-5.4);
+        int IMC = (int) (getPeso()/(getAltura()*getAltura()/10000));
+        if(getSexo() == 'M'|| getSexo() == 'm'){
+        	return (int) ((1.2*IMC)+(0.23*getEdad())-10.8-5.4);}
         else 
         	return (int) ((1.2*IMC)+(0.23*getEdad())-5.4);
     }
@@ -58,43 +58,43 @@ public class Deportista extends Persona{
     @Override
     public boolean esMayor(){
     	if(getRitmoCardiaco() > 100){
-    		System.out.println("No es recomendable entrenar hoy");
+    		//no es recomendable
     		return true;
  		}
  		else
  			return false;
     }
-    public void imprimirGrasaCorp(){
+    public String imprimirGrasaCorp(){
         System.out.println("Grasa corporal: "+ calcularIMC());
         switch (getSexo()){
 
             case 'F': 
             case 'f':
                 if (calcularIMC()<25){
-                    System.out.println("Delgada");
+                    return "Delgada";
                 }
                 else if (calcularIMC()>30){
-                    System.out.println("Exceso de grasa corporal");
+                    return "Exceso de grasa corporal";
                 }
                 else{
-                    System.out.println("Normal");
+                    return "Normal";
                 }
-            break;
+            
 
             case 'M':
             case 'm':
                 if (calcularIMC()<15){
-                    System.out.println("Delgado");
+                    return "Delgado";
                 }
                 else if (calcularIMC()>20){
-                    System.out.println("Exceso de grasa corporal");
+                    return "Exceso de grasa corporal";
                 }
                 else{
-                    System.out.println("Normal");
+                    return "Normal";
                 }
-            break;
-        }
 
+        }
+        return "";
     }
 
 	public String tipoEjerString(){
@@ -171,7 +171,7 @@ public class Deportista extends Persona{
 
     @Override
          public String retornarInfo(){
-        String temp="Datos de la persona:<br>Cedula: "+cedula+"<br>Nombre: "+nombre+"<br>Edad: "+edad+"<br>Sexo: "+sexo+"<br>Peso: "+peso+"<br>Altura: "+altura+"<br>Ritmo Cardiaco: "+ritmoCardiaco+"<br>Freq. Entrenamiento: "+frecuenciaEntr+"<br>Tipo de Ejercicio: "+tipoEjercicio+"<br>------<br>";
+        String temp="Cedula: "+cedula+System.lineSeparator()+"Nombre: "+nombre+System.lineSeparator()+"Edad: "+edad+System.lineSeparator()+"Sexo: "+sexo+System.lineSeparator()+"Peso: "+peso+System.lineSeparator()+"Altura: "+altura+System.lineSeparator()+"Ritmo Cardiaco: "+ritmoCardiaco+System.lineSeparator()+"Freq. Entrenamiento: "+frecuenciaEntr+System.lineSeparator()+"Tipo de Ejercicio: "+tipoEjercicio+System.lineSeparator()+"------"+System.lineSeparator();
         return temp;
     }
         

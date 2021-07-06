@@ -142,7 +142,7 @@ class Menu{
 	      	System.out.println("\n\n"); 
 		}
 
-		switch (opcion){
+		/*switch (opcion){
 			case 1:
 				entrenador.determinarRutina(deportista.calcularIMC(), deportista.getTipoEjercicio());
 				System.out.println("\n\n"); 
@@ -153,7 +153,7 @@ class Menu{
 				break;
 			default:
 				break;
-		}
+		}*/
 	}
 
 	public void opcionDeportista(Deportista deportista, Entrenador entrenador){

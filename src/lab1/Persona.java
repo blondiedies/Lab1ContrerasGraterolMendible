@@ -146,7 +146,7 @@ public abstract class Persona {
     }
     
         public String retornarInfo(){
-        String temp="Datos de la persona:<br>Cedula: "+cedula+"<br>Nombre: "+nombre+"<br>Edad: "+edad+"<br>Sexo: "+sexo+"<br>Peso: "+peso+"<br>Altura: "+altura+"<br>------<br>";
+        String temp="Datos de la persona:Cedula: "+cedula+"Nombre: "+nombre+"Edad: "+edad+"Sexo: "+sexo+"Peso: "+peso+"Altura: "+altura+"------";
         return temp;
     }
     

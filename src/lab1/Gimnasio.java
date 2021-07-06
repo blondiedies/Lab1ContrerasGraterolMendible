@@ -6,6 +6,7 @@
 package lab1;
 
 import java.util.ArrayList;
+import static lab1.Lab1.lista;
 
 /**
  *
@@ -26,6 +27,14 @@ public class Gimnasio {
         return lista.size();
     }
     
+    public ArrayList<Persona> getList(){
+        return lista;
+    }
+    
+    public boolean vacio(){
+        return lista.isEmpty();
+    }
+    
     public void imprimir(){
         //se imprime el contenido completo de la lista
         for (Persona temp: lista){//hasta que la lista se vacie
@@ -40,7 +49,7 @@ public class Gimnasio {
         String temporal="";
         for (Persona temp: lista){
             temporal= temporal; 
-            temporal= temporal + "<br>" +temp.retornarInfo();//usar html al imprimir en la parte grafica
+            temporal= temporal + System.lineSeparator() +temp.retornarInfo();//usar html al imprimir en la parte grafica
         }
         return temporal;
     }
@@ -50,7 +59,7 @@ public class Gimnasio {
         for (Persona temp: lista){
             if (temp instanceof Entrenador){
             temporal= temporal; 
-            temporal= temporal + "<br>" +temp.retornarInfo();//usar html al imprimir en la parte grafica
+            temporal= temporal + System.lineSeparator() +temp.retornarInfo();//usar html al imprimir en la parte grafica
         }}
         return temporal;
     }
@@ -60,10 +69,23 @@ public class Gimnasio {
         for (Persona temp: lista){
             if (temp instanceof Deportista){
             temporal= temporal; 
-            temporal= temporal + "<br>" +temp.retornarInfo();//usar html al imprimir en la parte grafica
+            temporal= temporal + System.lineSeparator() +temp.retornarInfo();
         }}
         return temporal;
     }
+    
+    public Persona buscarEnLista(int cedula){
+        for (Persona temp: lista){
+            if ((temp instanceof Deportista)&&(temp.cedula==cedula)){
+            return temp;
+        }}
+         return null;
+    }
+    
+    public ArrayList<Persona> getLista(){
+        return lista;
+    }
+    
     
     
 }

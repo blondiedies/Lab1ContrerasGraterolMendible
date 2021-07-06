@@ -8,7 +8,7 @@ public class Entrenador extends Persona{
     Scanner entrada = new Scanner(System.in);
     Validaciones valido = new Validaciones();
 
-    public Entrenador(int experienciaLaboral, String especialidad, int cedula, String nombre, int edad, char sexo, float peso, float altura) {
+    public Entrenador(int experienciaLaboral, String especialidad, int cedula, String nombre, int edad, char sexo, double peso, double altura) {
         super(cedula, nombre, edad, sexo, peso, altura);
         this.experienciaLaboral = experienciaLaboral;
         this.especialidad = especialidad;
@@ -65,36 +65,98 @@ public class Entrenador extends Persona{
         System.out.println("Especialidad: "+especialidad);
     }
 
-    public void determinarRutina(int grasaCorporal, int tipoEjercicio){
-    	if(tipoEjercicio == 6 || tipoEjercicio == 7)//relajacion, equilibrio y flexibilidad
-    		System.out.println("Se recomienda hacer yoga y ejercicios de meditación");
-    	else if(tipoEjercicio == 5) //ejerccios de fuerza
-    		System.out.println("Hacer ejercicios con pesas");
-    	else if ( tipoEjercicio == 2 || tipoEjercicio == 3) { // reduccion de medidas y de peso
+    public String determinarRutina(int grasaCorporal, String tipoEjercicio){
+        /*case 1: return "tonificacion";
+	        case 2: return "redux peso";
+	        case 3: return "redux medidas";
+	        case 4: return "cardio";
+	        case 5: return "pesas";
+	        case 6: return "flexibilidad"; 
+	        case 7: return "relajacion";
+	        default: return "";*/
+        switch (tipoEjercicio){
+            case "tonificacion":
+                if ( grasaCorporal < 20)
+    			return "Hacer ejercicio con pesas";	
+    		else
+    			return "Hacer ejercicio con pesas y ejercicios cardiovasculares"; 
+                
+            
+            case "relajacion":
+            case "flexibilidad":
+                return "Se recomienda hacer yoga y ejercicios de meditación";
+                
+            case "pesas":
+                return "Hacer ejercicios con pesas";
+            
+            case "redux peso":
+            case "redux medidas":
     		if(grasaCorporal < 20)
-    			System.out.println("No se puede determinar rutina porque su % de grasa corporal es muy bajo");
+    			return "No se puede determinar rutina porque su % de grasa corporal es muy bajo";
     		else if(grasaCorporal < 40)
-    			System.out.println("Hacer ejercicios con pesas y HIIT");
+    			return "Hacer ejercicios con pesas y HIIT";
     		else
-    			System.out.println("Hacer ejercicios con pesas y caminar");
-    	}else if(tipoEjercicio == 4){ // cardio
+    			return "Hacer ejercicios con pesas y caminar";
+    	
+            case "cardio":
 			if ( grasaCorporal < 20) 
-				System.out.println("No se puede determinar rutina porque su % de grasa corporal es muy bajo");
+				return "No se puede determinar rutina porque su % de grasa corporal es muy bajo";
 			else if(grasaCorporal < 40)
-				System.out.println("Hacer HITT y saltar la cuerda");
+				return "Hacer HITT y saltar la cuerda";
 			else{
-				System.out.println("Caminar o si su médico lo permite trotar");
+				return "Caminar o si su médico lo permite trotar";
 			}
-    	}else{ // tonificar
-    		if ( grasaCorporal < 20)
-    			System.out.println("Hacer ejercicio con pesas");	
-    		else
-    			System.out.println("Hacer ejercicio con pesas y ejercicios cardiovasculares"); 
-    	}
+            default:
+                return "";
+    		
+        }
     }
 
-    public void determinarRutina(Deportista deportista){
-    
+    public String determinarRutina(String tipoEjercicio, int grasaCorporal){ //objetivos
+        /*case 1: return "tonificacion";
+	        case 2: return "redux peso";
+	        case 3: return "redux medidas";
+	        case 4: return "cardio";
+	        case 5: return "pesas";
+	        case 6: return "flexibilidad"; 
+	        case 7: return "relajacion";
+	        default: return "";*/
+        switch (tipoEjercicio){
+            case "tonificacion":
+                if ( grasaCorporal < 20)
+    			return "10 repeticiones";	
+    		else
+    			return "15 repeticiones"; 
+                
+            
+            case "relajacion":
+            case "flexibilidad":
+                return "Media hora diaria";
+                
+            case "pesas":
+                return "Una hora diaria";
+            
+            case "redux peso":
+            case "redux medidas":
+    		if(grasaCorporal < 20)
+    			return "No se puede determinar sus objetivos porque su % de grasa corporal es muy bajo";
+    		else if(grasaCorporal < 40)
+    			return "Media hora al dia";
+    		else
+    			return "Una hora al dia";
+    	
+            case "cardio":
+			if ( grasaCorporal < 20) 
+				return "No se puede determinar sus objetivos porque su % de grasa corporal es muy bajo";
+			else if(grasaCorporal < 40)
+				return "Media hora al dia";
+			else{
+				return "Una hora al dia";
+			}
+            default:
+                return "";
+    		
+        }
     }
 
     void imprimirDatosDeportista() {
@@ -103,7 +165,7 @@ public class Entrenador extends Persona{
     
     @Override
     public String retornarInfo(){
-        String temp="Datos de la persona:<br>Cedula: "+cedula+"<br>Nombre: "+nombre+"<br>Edad: "+edad+"<br>Sexo: "+sexo+"<br>Peso: "+peso+"<br>Altura: "+altura+"<br>Exp. Laboral: "+experienciaLaboral+"<br>Especialidad: "+especialidad+"<br>------<br>";
+        String temp="Cedula: "+cedula+System.lineSeparator()+"Nombre: "+nombre+System.lineSeparator()+"Edad: "+edad+System.lineSeparator()+"Sexo: "+sexo+System.lineSeparator()+"Peso: "+peso+System.lineSeparator()+"Altura: "+altura+System.lineSeparator()+"Exp. Laboral: "+experienciaLaboral+System.lineSeparator()+"Especialidad: "+especialidad+System.lineSeparator()+"------"+System.lineSeparator();
         return temp;
     }
 }
