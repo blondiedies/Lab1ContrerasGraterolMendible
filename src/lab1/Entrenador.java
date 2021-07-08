@@ -34,21 +34,14 @@ public class Entrenador extends Persona{
         this.especialidad = especialidad;
     }
 
-    public void setDatosEntrenador(){
+    public void setDatosEntrenador(int cedula, int edad, String nombre, char sexo, double altura, double peso,int exp, String esp){
        
-        setDatosPersona();
+        setDatosPersona(cedula, edad, nombre,sexo, altura, peso);
 
-        int dato = 500;
-    	while(!valido.validar(0, getEdad()-16, dato)){
-    		System.out.print("Indique la cantidad de años que tiene de experinecia laboral, se asume que empezo a trabajar despues de los 16 años");
-        	dato = entrada.nextInt();
-        	System.out.println("\n");
-    	}
-    	setExperienciaLaboral(dato);
+        
+    	setExperienciaLaboral(exp);
       
-		System.out.print("Indique su especialidad");
-		setEspecialidad(System.console().readLine());
-                System.out.println("\n");
+        setEspecialidad(esp);
         
    	}
        

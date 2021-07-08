@@ -20,13 +20,7 @@ public class Rutina extends javax.swing.JFrame {
     
 
     public void genRutinaObj(){
-        Deportista d = (Deportista) Lab1.lista.buscarEnLista(Lab1.cedulatemp);
-        Entrenador e = new Entrenador();
-                //rutina y objetivos
-        String a="Grasa corporal: "+d.calcularIMC()+"%; Tipo de ejercicio: "+d.tipoEjerString()+System.lineSeparator()+e.determinarRutina(d.calcularIMC(), d.tipoEjerString());
-        String b=System.lineSeparator()+"Objetivos: "+e.determinarRutina(d.tipoEjerString(),d.calcularIMC());
-       jTextArea1.setText(a+b);
-
+        Lab1.c.detRut();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,9 +137,17 @@ public class Rutina extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 dispose();
-    new MenuEntrenador().setVisible(true);          // TODO add your handling code here:
+    Lab1.c.mostrarMenuEntrenador();         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    
+    public void setTexto(javax.swing.JTextArea area, String texto){
+        area.setText(texto);
+    }
+    
+    public javax.swing.JTextArea getTextArea1(){
+        return jTextArea1;
+    }
     /**
      * @param args the command line arguments
      */

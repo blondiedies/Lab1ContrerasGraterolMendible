@@ -10,6 +10,7 @@ package lab1;
  * @author captain trouble
  */
 public class ListaDeportistas extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form ListaDeportistas
@@ -19,12 +20,15 @@ public class ListaDeportistas extends javax.swing.JFrame {
     }
     
     public void mostrarLista(){
-                           //busqueda en lista
-               String a= Lab1.lista.retornarDeportista();
-
-
-       jTextArea1.setText(a);
+Lab1.c.mostrarListaD();
+    }
     
+    public void setTexto(javax.swing.JTextArea area, String texto){
+        area.setText(texto);
+    }
+    
+    public javax.swing.JTextArea getTextArea1(){
+        return jTextArea1;
     }
 
     /**
@@ -131,7 +135,7 @@ public class ListaDeportistas extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 dispose();
-    new MenuDeportista().setVisible(true);          // TODO add your handling code here:
+    Lab1.c.mostrarMenuDeportista();          // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

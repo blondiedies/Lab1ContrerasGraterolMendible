@@ -10,7 +10,7 @@ package lab1;
  * @author captain trouble
  */
 public class MenuEntrenador extends javax.swing.JFrame {
-
+    private Controlador c = new Controlador();
 
     /**
      * Creates new form MenuEntrenador
@@ -149,28 +149,24 @@ public class MenuEntrenador extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 dispose();
-    new NuevoEntrenador().setVisible(true);        // TODO add your handling code here:
+   Lab1.c.mostrarNuevoEntrenador();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 dispose();
-    ListaEntrenadores ent = new ListaEntrenadores();
-    ent.mostrarLista();
-    ent.setVisible(true);                 
+    Lab1.c.mostrarListaEnt();
              // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
     //rutina
-        Lab1.check=3;
-        VentanaCedula vent = new VentanaCedula();
-        vent.setVisible(true);   
+        Lab1.c.rutina();  
     dispose();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
     dispose();
-    new MenuPrincipal().setVisible(true);   // TODO add your handling code here:
+    Lab1.c.mostrarMenuPpal();  // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

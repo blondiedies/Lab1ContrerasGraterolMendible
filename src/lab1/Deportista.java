@@ -110,39 +110,17 @@ public class Deportista extends Persona{
 	    }
 	}   
 
-	public void setDatosDeportista(){
-		    
-		setDatosPersona();
+	public void setDatosDeportista(int cedula, int edad, String nombre, char sexo, double altura, double peso,int rc, int freq, int tipo){
+		   
+        setDatosPersona(cedula, edad, nombre,sexo, altura, peso);
 
-		int dato = 0;
-    	while(!valido.validar(40, 120, dato)){
-    		System.out.print("Indique la frecuencia cardiaca de la persona entre 40 y 120 lpm");
-        	dato = entrada.nextInt();
-        	System.out.println("\n");
-    	}
-    	setRitmoCardiaco(dato);
+    	setRitmoCardiaco(rc);
 		    
-    	while(!valido.validar(1, 2, dato)){
-    		System.out.print("Indique la frecuencia de entrenamiento 1 que corresponde a diaria y 2 que corresponde a semanal");
-        	dato = entrada.nextInt();
-        	System.out.println("\n");
-    	}
-    	setFrecuenciaEntr(dato);        
 
-    	dato = 0;
-		while(!valido.validar(1, 7, dato)){
-    		System.out.println("Indique número correspondiente a el tipo de ejercicio:");
-    		System.out.println("1. Tonificacion");
-    		System.out.println("2. Reducción de peso");
-    		System.out.println("3. Reducción de medidas");
-    		System.out.println("4. Cardiovascular");
-    		System.out.println("5. Ejercicios de Fuerza");
-    		System.out.println("6. Ejercicios de flexibilidad y equilibrio");
-    		System.out.println("7. Ejercicios de relajación");
-        	dato = entrada.nextInt();
-        	System.out.println("\n");
-    	}
-    	setTipoEjercicio(dato);            	       	
+    	setFrecuenciaEntr(freq);        
+
+
+    	setTipoEjercicio(tipo);            	       	
 	}
 
     @Override

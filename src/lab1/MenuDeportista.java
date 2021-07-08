@@ -163,26 +163,22 @@ public class MenuDeportista extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     //ritmocardiaco
-    Lab1.check=2;
-        VentanaCedula vent = new VentanaCedula();
-        vent.setVisible(true);   
+    Lab1.c.ritmoCardiaco();
     dispose();
           // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    dispose();
-    ListaDeportistas dep = new ListaDeportistas();
-    dep.mostrarLista();
-    dep.setVisible(true);        // TODO add your handling code here:
+    Lab1.c.MostrarListaDeportistas();
+    
+        dispose();
+           // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
     
     //imc
-    Lab1.check=1;
-        VentanaCedula vent = new VentanaCedula();
-        vent.setVisible(true);   
+    Lab1.c.IMC();
     dispose();
     
            // TODO add your handling code here:
@@ -190,12 +186,12 @@ public class MenuDeportista extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 dispose();
-    new MenuPrincipal().setVisible(true);        // TODO add your handling code here:
+    Lab1.c.mostrarMenuPpal();     // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 dispose();
-    new NuevoDeportista().setVisible(true);        // TODO add your handling code here:
+    Lab1.c.mostrarNuevoDeportista();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

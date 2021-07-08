@@ -11,6 +11,7 @@ package lab1;
  */
 public class IMC extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form IMC
      */
@@ -22,14 +23,17 @@ public class IMC extends javax.swing.JFrame {
     
     public void calcularIMC(){
                         //busqueda en lista
+                        Lab1.c.calcIMC();
         
-        Deportista d = (Deportista) Lab1.lista.buscarEnLista(Lab1.cedulatemp);
-                //calculo del imc
-                int IMC = (int) (d.getPeso()/(d.getAltura()*d.getAltura()/10000));
-                String indice=String.valueOf(IMC);
-                String valor=String.valueOf(d.calcularIMC());
-
-       jTextArea1.setText("IMC: "+indice+"; Porcentaje de grasa: "+valor+"; Estado del deportista: "+d.imprimirGrasaCorp());
+        
+    }
+    
+    public void setTexto(javax.swing.JTextArea area, String texto){
+        area.setText(texto);
+    }
+    
+    public javax.swing.JTextArea getTextArea1(){
+        return jTextArea1;
     }
     
    
@@ -171,7 +175,7 @@ public class IMC extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 dispose();
-    new MenuDeportista().setVisible(true);         // TODO add your handling code here:
+    Lab1.c.mostrarMenuDeportista();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

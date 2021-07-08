@@ -21,12 +21,15 @@ public class ListaEntrenadores extends javax.swing.JFrame {
     }
 
         public void mostrarLista(){
-                           //busqueda en lista
-               String a= Lab1.lista.retornarEntrenador();
-
-
-       jTextArea1.setText(a);
+Lab1.c.mostrarListaE();
+    }
     
+    public void setTexto(javax.swing.JTextArea area, String texto){
+        area.setText(texto);
+    }
+    
+    public javax.swing.JTextArea getTextArea1(){
+        return jTextArea1;
     }
     /**
      * This method is called from within the constructor to initialize the form.

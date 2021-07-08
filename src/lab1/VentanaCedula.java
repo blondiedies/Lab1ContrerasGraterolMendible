@@ -14,6 +14,7 @@ import lab1.Lab1;
  */
 public class VentanaCedula extends javax.swing.JFrame {
 
+
     /**
      * Creates new form VentanaCedula
      */
@@ -142,34 +143,15 @@ public class VentanaCedula extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int a = Integer.parseInt(jTextField3.getText());
-        Lab1.cedulatemp=a;
-        //para determinar a cual ventana se sigue
-        switch (Lab1.check){
-            case 1: //imc
-                IMC masa = new IMC();
-                masa.calcularIMC();
-                masa.setVisible(true);
-                dispose();
-                break;
-        
-            case 2: //ritmo cardiaco
-                RitmoCardiaco rc = new RitmoCardiaco();
-                rc.ritmoCard();
-                rc.setVisible(true);
-                dispose();
-                break;
-            
-            case 3: //rutina entrenador
-                Rutina rut = new Rutina();
-                rut.genRutinaObj();
-                rut.setVisible(true);
-               dispose();
-        }
-        
-
+       Lab1.c.cedula();
+       dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+public String getTexto(javax.swing.JTextField textbox){
+        return textbox.getText();
+    }
+    public javax.swing.JTextField getTextField3(){
+        return jTextField3;
+    }
     /**
      * @param args the command line arguments
      */

@@ -74,49 +74,22 @@ public abstract class Persona {
     }
    
 // OTROS METODOS
-    public void setDatosPersona(){
+    public void setDatosPersona(int cedula, int edad, String nombre, char sexo, double altura, double peso){
 
-    	int dato = 0;
-    	while(!valido.validar(9999999, 99999999, dato)){
-    		System.out.print("Indique la cedula de la persona entre 7 y 8 digitos: ");
-        	dato = entrada.nextInt();
-        	System.out.println("\n");
-    	}
-    	setCedula(dato);
+    	
+    	setCedula(cedula);
         
-		while(!valido.validar(12, 85, dato)){
-    		System.out.print("Indique edad de la persona entre 12 y 85 años: ");
-        	dato = entrada.nextInt();
-        	System.out.println("\n");
-    	}
-    	setEdad(dato);
+    	setEdad(edad);
         
-       	System.out.print("Indique nombre la persona: ");
-    	String dato1 = System.console().readLine();
-    	setNombre(dato1);
+    	setNombre(nombre);
         
-        char dato2 = 't';
-        while(!valido.validar('F', 'M', dato2)){
-    		System.out.print("Indique sexo de la persona con una letra 'F' si es femenino y 'M' si es masculino: ");
-        	dato2 = entrada.next().charAt(0);
-        	System.out.println("\n");
-    	}
-    	setSexo(dato2);
+        
+    	setSexo(sexo);
 
-    	double dato3 = 0.0;
-    	while(!valido.validar(1.4, 2.5, dato3)){
-    		System.out.print("Indique altura de la persona entre '1.4' y '2.0' metros: ");
-        	dato3 = entrada.nextFloat();
-        	System.out.println("\n");
-    	}
-    	setAltura(dato3);
+    	
+    	setAltura(altura);
 
-        while(!valido.validar(40.0, 150.0, dato)){
-    		System.out.print("Indique peso de la persona entre '40.0' y '150.0' kg: ");
-        	dato3 = entrada.nextFloat();
-        	System.out.println("\n");
-    	}
-    	setPeso(dato3);
+    	setPeso(peso);
     }
 
     public boolean esMayor(){

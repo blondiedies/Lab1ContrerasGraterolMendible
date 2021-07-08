@@ -10,7 +10,7 @@ package lab1;
  * @author captain trouble
  */
 public class NuevoDeportista extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form NuevoEntrenador
      */
@@ -277,7 +277,7 @@ public class NuevoDeportista extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 dispose();
-    new MenuDeportista().setVisible(true);         // TODO add your handling code here:
+    Lab1.c.mostrarMenuDeportista();      // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -293,42 +293,48 @@ dispose();
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        char sexo = 'F';
-        int tipoejer=1;
-        int ced = Integer.parseInt(jTextField3.getText());
-        String nombre =jTextField1.getText();
-        int edad = Integer.parseInt(jTextField2.getText());
-        if (jComboBox1.getSelectedItem()=="M"){
-             sexo = 'M';
-        }
-        double peso=Double.parseDouble(jTextField4.getText());
-        double alt=Double.parseDouble(jTextField5.getText());
-        int rc = Integer.parseInt(jTextField7.getText());
-        int freq= Integer.parseInt(jTextField6.getText());
- 
-        if (jComboBox2.getSelectedItem()=="Tonificación"){
-            tipoejer=1;
-        }
-        else if (jComboBox2.getSelectedItem()=="Reducción de Peso"){
-            tipoejer=2;}
-        else if(jComboBox2.getSelectedItem()=="Reducción de Medidas"){
-            tipoejer=3;}
-        if (jComboBox2.getSelectedItem()=="Cardio"){
-            tipoejer=4;
-        }
-        else if (jComboBox2.getSelectedItem()=="Pesas"){
-            tipoejer=5;}
-        else if(jComboBox2.getSelectedItem()=="Flexibilidad"){
-            tipoejer=6;}
-        else if(jComboBox2.getSelectedItem()=="Relajación"){
-            tipoejer=7;}
-        
-        Deportista d = new Deportista(rc, freq, tipoejer, ced, nombre,  edad, sexo,  peso,  alt);
-        Lab1.lista.agregarLista(d);
+        /*Validaciones y captacion de datos*/      
+        Lab1.c.crearDep();              
         dispose();
-        new MenuDeportista().setVisible(true);        // TODO add your handling code here:
+        Lab1.c.mostrarNuevoDeportista();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
+//para obtener los textfields
+    public String getTexto(javax.swing.JTextField textbox){
+        return textbox.getText();
+    }
+    public javax.swing.JTextField getTextField3(){
+        return jTextField3;
+    }
+    public javax.swing.JTextField getTextField1(){
+        return jTextField1;
+    }
+    public javax.swing.JTextField getTextField2(){
+        return jTextField2;
+    }
+    public javax.swing.JTextField getTextField4(){
+        return jTextField4;
+    }
+    public javax.swing.JTextField getTextField5(){
+        return jTextField5;
+    }
+    public javax.swing.JTextField getTextField6(){
+        return jTextField6;
+    }
+    public javax.swing.JTextField getTextField7(){
+        return jTextField7;
+    }
+    //para obtener los combobox
+    public Object getCombo (javax.swing.JComboBox combo){
+        return combo.getSelectedItem();
+    }
+    public javax.swing.JComboBox getComboBox1(){
+        return jComboBox1;
+    }
+    public javax.swing.JComboBox getComboBox2(){
+        return jComboBox2;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

@@ -291,23 +291,46 @@ dispose();
         /*super(cedula, nombre, edad, sexo, peso, altura);
         this.experienciaLaboral = experienciaLaboral;
         this.especialidad = especialidad;*/
-        char sexo = 'F';
-        int ced = Integer.parseInt(jTextField3.getText());
-        String nombre =jTextField1.getText();
-        int edad = Integer.parseInt(jTextField2.getText());
-        if (jComboBox1.getSelectedItem()=="M"){
-             sexo = 'M';
-        }
-        double peso=Double.parseDouble(jTextField4.getText());
-        double alt=Double.parseDouble(jTextField5.getText());
-        int exp = Integer.parseInt(jTextField7.getText());
-        String esp= jTextField6.getText();
-        Entrenador e = new Entrenador(exp, esp, ced, nombre,  edad, sexo,  peso,  alt);
-        Lab1.lista.agregarLista(e);
+        Lab1.c.crearEnt();
         dispose();
-        new MenuEntrenador().setVisible(true);
+        Lab1.c.mostrarMenuEntrenador();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**/
+     public String getTexto(javax.swing.JTextField textbox){
+        return textbox.getText();
+    }
+    public javax.swing.JTextField getTextField3(){
+        return jTextField3;
+    }
+    public javax.swing.JTextField getTextField1(){
+        return jTextField1;
+    }
+    public javax.swing.JTextField getTextField2(){
+        return jTextField2;
+    }
+    public javax.swing.JTextField getTextField4(){
+        return jTextField4;
+    }
+    public javax.swing.JTextField getTextField5(){
+        return jTextField5;
+    }
+    public javax.swing.JTextField getTextField6(){
+        return jTextField6;
+    }
+    public javax.swing.JTextField getTextField7(){
+        return jTextField7;
+    }
+    //para obtener los combobox
+    public Object getCombo (javax.swing.JComboBox combo){
+        return combo.getSelectedItem();
+    }
+    public javax.swing.JComboBox getComboBox1(){
+        return jComboBox1;
+    }
+   
+    
     /**
      * @param args the command line arguments
      */

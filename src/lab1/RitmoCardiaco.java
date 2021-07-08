@@ -13,30 +13,40 @@ import java.awt.Color;
  */
 public class RitmoCardiaco extends javax.swing.JFrame {
 
+
     /**
      * Creates new form RitmoCardiaco
      */
     public RitmoCardiaco() {
         initComponents();
     }
+    ///
+    public void setTexto(javax.swing.JTextArea area, String texto){
+        area.setText(texto);
+    }
+    
+    public javax.swing.JTextArea getTextArea1(){
+        return jTextArea1;
+    }
+    ///
+    public void setTextoL(javax.swing.JLabel area, String texto){
+        area.setText(texto);
+    }
+    
+    public javax.swing.JLabel getLabel6(){
+        return jLabel6;
+    }
+    public javax.swing.JLabel getLabel7(){
+        return jLabel7;
+    }
+    ///
+    public void setForegroundColor (javax.swing.JLabel area, Color color){
+        area.setForeground(color);
+    }
+    
     
     public void ritmoCard(){
-        Deportista d = (Deportista) Lab1.lista.buscarEnLista(Lab1.cedulatemp);
-                //calculo del imc
-                if (d.esMayor()){
-                    jLabel7.setText("ELEVADO");
-                    jLabel7.setForeground(Color.RED);
-                    jLabel6.setText("No se recomienda hacer actividad");
-                    //no es recomendable
-                }
-                else{
-                    jLabel7.setText("NORMAL");
-                    jLabel7.setForeground(Color.GREEN);                    
-                    jLabel6.setText("Se puede hacer actividad");
-                }
-
-       jTextArea1.setText(String.valueOf(d.getRitmoCardiaco()));
-
+Lab1.c.ritmo();
     }
 
     /**
@@ -178,7 +188,7 @@ public class RitmoCardiaco extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 dispose();
-    new MenuDeportista().setVisible(true);         // TODO add your handling code here:
+    Lab1.c.mostrarMenuDeportista();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
