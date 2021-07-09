@@ -5,6 +5,9 @@
  */
 package lab1;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author captain trouble
@@ -293,13 +296,17 @@ dispose();
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*Validaciones y captacion de datos*/      
-        Lab1.c.crearDep();              
+        try {
+            /*Validaciones y captacion de datos*/              
+            Lab1.c.crearDep();
+        } catch (ExcepcionPropia ex) {
+        }
         dispose();
         Lab1.c.mostrarMenuDeportista();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 //para obtener los textfields
     public String getTexto(javax.swing.JTextField textbox){
+        
         return textbox.getText();
     }
     public javax.swing.JTextField getTextField3(){

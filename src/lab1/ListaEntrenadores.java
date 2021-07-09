@@ -136,7 +136,7 @@ Lab1.c.mostrarListaE();
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 dispose();
-    new MenuEntrenador().setVisible(true);         // TODO add your handling code here:
+ Lab1.c.mostrarMenuEntrenador();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
 

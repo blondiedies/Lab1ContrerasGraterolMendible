@@ -8,6 +8,7 @@ public class Lab1 {
     static Gimnasio lista=new Gimnasio();
     static int check=0;
     static Controlador c = new Controlador();
+    static String error="";
         
     public Gimnasio getLista(){
         return lista;
@@ -28,11 +29,9 @@ public class Lab1 {
       
         c.mostrarMenuPpal();
         //probando las validaciones
-        boolean validarCedula = new Validaciones().validarCedula("29000000");
-        System.out.println(validarCedula);
+
         
-        boolean nombrev = new Validaciones().validarString("Angelica Schuyler Jrr",20);
-        System.out.println(nombrev);
+
 	}
 }
 

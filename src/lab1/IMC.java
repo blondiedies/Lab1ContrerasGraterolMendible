@@ -32,12 +32,14 @@ public class IMC extends javax.swing.JFrame {
                 indice=String.valueOf(IMC);
                 valor=String.valueOf(d.calcularIMC());}
     catch (NullPointerException excepcion2){
-     System.out.println("Caracter invalido2");   
+     Lab1.error=Lab1.error+System.lineSeparator()+"Imposible calcular IMC"; 
+     stringf=Lab1.error;
     }
 
     try{stringf="IMC: "+indice+"; Porcentaje de grasa: "+valor+"; Estado del deportista: "+d.imprimirGrasaCorp();}
     catch (NullPointerException excepcion3){
-     System.out.println("Caracter invalido2");   
+     Lab1.error=Lab1.error+System.lineSeparator()+"Imposible calcular porcentaje de grasa";  
+     stringf=Lab1.error;
     }
     
      return stringf;

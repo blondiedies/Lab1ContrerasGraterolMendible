@@ -13,7 +13,7 @@ import lab1.Lab1;
  * @author captain trouble
  */
 public class VentanaCedula extends javax.swing.JFrame {
-
+private Validaciones v = new Validaciones();
 
     /**
      * Creates new form VentanaCedula
@@ -147,9 +147,15 @@ public class VentanaCedula extends javax.swing.JFrame {
        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 public String getTexto(javax.swing.JTextField textbox){
+
+    if (v.validarCedulaExistente(textbox.getText())){
         return textbox.getText();
     }
+    else
+        return "Cedula Invalida";
+    }
     public javax.swing.JTextField getTextField3(){
+        
         return jTextField3;
     }
     /**

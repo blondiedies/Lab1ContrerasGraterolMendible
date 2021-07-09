@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  *
  * @author captain trouble
  */
-public class Controlador  implements ActionListener {
+public class Controlador  {
     private Deportista d;
     private Entrenador e;
     private Gimnasio g;
@@ -29,6 +29,7 @@ public class Controlador  implements ActionListener {
     private ListaDeportistas listaD;  
     private ListaEntrenadores listaE;
     private VentanaError error= new VentanaError();
+    private Validaciones v = new Validaciones();
     
 
     public Controlador() {
@@ -111,23 +112,63 @@ public void mostrarNuevoDeportista() {
 
 /*Nuevo Deportista*/
 
-public void crearDep(){
-    //captacion de datos
-    //sexo
+public void crearDep() throws ExcepcionPropia{
+    Lab1.error="";
      char sexo = 'F';
-        int tipoejer=1;
-        int ced = Integer.parseInt(nuevod.getTexto(nuevod.getTextField3()));
-        String nombre =nuevod.getTexto(nuevod.getTextField1());
-        int edad = Integer.parseInt(nuevod.getTexto(nuevod.getTextField2()));
+        int tipoejer=1, ced=0, exp=0, edad=0, rc=0, freq=0;
+        double peso=0, alt=0;
+        String nombre="";
+        try{
+            //cedula
+        try{if (v.validarCedula(nuevod.getTexto(nuevod.getTextField3()))){
+            ced = Integer.parseInt(nuevod.getTexto(nuevod.getTextField3()));
+        }}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"CEDULA INVALIDA";}
+        catch (NumberFormatException n){Lab1.error=Lab1.error+System.lineSeparator()+"CEDULA INVALIDA";}
         
+        //EDAD
+        try{
+            if (v.validarNum(nuevod.getTexto(nuevod.getTextField2()),"1,3", 18, 100))
+                    {
+            edad = Integer.parseInt(nuevod.getTexto(nuevod.getTextField2()));}}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"EDAD INVALIDA";}
+        catch (NumberFormatException n){Lab1.error=Lab1.error+System.lineSeparator()+"EDAD INVALIDA";}
+        //sexo (no requiere validacion)
         if (nuevod.getCombo(nuevod.getComboBox1())=="M"){
              sexo = 'M';
         }
+        //PESO/ALTURA
+        try{if (v.validarNum(nuevod.getTexto(nuevod.getTextField4()),"1,3", 1, 500))
+                    {peso=Double.parseDouble(nuevod.getTexto(nuevod.getTextField4()));}}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"PESO INVALIDO";
+     }
+        catch (NumberFormatException n){Lab1.error=Lab1.error+System.lineSeparator()+"PESO INVALIDO";}
+        try{if (v.validarNum(nuevod.getTexto(nuevod.getTextField5()),"1,3", 1, 400))
+                    {alt=Double.parseDouble(nuevod.getTexto(nuevod.getTextField5()));}}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"ALTURA INVALIDA";}
+        catch (NumberFormatException n){Lab1.error=Lab1.error+System.lineSeparator()+"ALTURA INVALIDA";}
+     
         
-        double peso=Double.parseDouble(nuevod.getTexto(nuevod.getTextField4()));
-        double alt=Double.parseDouble(nuevod.getTexto(nuevod.getTextField5()));
-        int rc = Integer.parseInt(nuevod.getTexto(nuevod.getTextField7()));
-        int freq= Integer.parseInt(nuevod.getTexto(nuevod.getTextField6()));
+                //nombre
+        try{
+            if(v.validarString(nuevod.getTexto(nuevod.getTextField1()),20)){
+            nombre =nuevod.getTexto(nuevod.getTextField1());};}
+        catch(ExcepcionPropia excepcionnom){
+            Lab1.error=Lab1.error+System.lineSeparator()+"NOMBRE INVALIDO";}
+        
+        //ritmo card
+try{if (v.validarNum(nuevod.getTexto(nuevod.getTextField7()),"1,3", 1, 200)){
+            rc = Integer.parseInt(nuevod.getTexto(nuevod.getTextField7()));}}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"RC INVALIDO";}
+catch(NumberFormatException excepcionnum){Lab1.error=Lab1.error+System.lineSeparator()+"RC INVALIDO";
+     }
+        
+        //frecuencia
+try{if (v.validarNum(nuevod.getTexto(nuevod.getTextField6()),"1", 1, 7)){
+        freq= Integer.parseInt(nuevod.getTexto(nuevod.getTextField6()));}}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"FREQ INVALIDA";        }
+catch(NumberFormatException excepcionnum){Lab1.error=Lab1.error+System.lineSeparator()+"FREQ INVALIDA";
+     }
         
         if (nuevod.getCombo(nuevod.getComboBox2())=="Tonificación"){
             tipoejer=1;
@@ -136,7 +177,7 @@ public void crearDep(){
             tipoejer=2;}
         else if(nuevod.getCombo(nuevod.getComboBox2())=="Reducción de Medidas"){
             tipoejer=3;}
-        if (nuevod.getCombo(nuevod.getComboBox2())=="Cardio"){
+        else if (nuevod.getCombo(nuevod.getComboBox2())=="Cardio"){
             tipoejer=4;
         }
         else if (nuevod.getCombo(nuevod.getComboBox2())=="Pesas"){
@@ -144,12 +185,21 @@ public void crearDep(){
         else if(nuevod.getCombo(nuevod.getComboBox2())=="Flexibilidad"){
             tipoejer=6;}
         else if(nuevod.getCombo(nuevod.getComboBox2())=="Relajación"){
-            tipoejer=7;}
-       
-    
+            tipoejer=7;}}
+        catch(NullPointerException hmm){}
+
+finally{
+                  
+    if (Lab1.error==""){//no hubo excepciones
+
     //creando el deportista
     Deportista d = new Deportista(rc, freq, tipoejer, ced, nombre,  edad, sexo,  peso,  alt);
-    Lab1.lista.agregarLista(d);
+    Lab1.lista.agregarLista(d);}
+    else{
+        error.setTexto(error.getTextArea1(),"ERRORES: "+Lab1.error);
+     error.setVisible(true); 
+    }
+}  
 }
 
 /*listadep*/
@@ -170,10 +220,10 @@ public void calcIMC(){
 
 /*Ritmo Cardiaco*/
 
-public void ritmo(){
-            Deportista d = (Deportista) Lab1.lista.buscarEnLista(Lab1.cedulatemp);
-                //calculo del imc
-                if (d.esMayor()){
+public void ritmo()throws NullPointerException{
+            try{Deportista d = (Deportista) Lab1.lista.buscarEnLista(Lab1.cedulatemp);
+            
+            if (d.esMayor()){
                     vrc.setTextoL(vrc.getLabel7(),"ELEVADO");
                     vrc.setForegroundColor(vrc.getLabel7(),Color.RED);
                     vrc.setTextoL(vrc.getLabel6(),"No se recomienda hacer actividad");
@@ -184,8 +234,18 @@ public void ritmo(){
                     vrc.setForegroundColor(vrc.getLabel7(),Color.GREEN);
                     vrc.setTextoL(vrc.getLabel6(),"Se puede hacer actividad");
                 }
+                
+vrc.setTexto(vrc.getTextArea1(),String.valueOf(d.getRitmoCardiaco()));}
 
-       vrc.setTexto(vrc.getTextArea1(),String.valueOf(d.getRitmoCardiaco()));
+           catch(NullPointerException excepcion6){
+                    Lab1.error=Lab1.error+System.lineSeparator()+"Cedula Invalida";
+            error.setTexto(error.getTextArea1(),Lab1.error); error.setVisible(true);
+                    vrc.setTextoL(vrc.getLabel7(),"No es posible mostrar el ritmo cardíaco");
+                    vrc.setForegroundColor(vrc.getLabel7(),Color.BLUE);
+                    vrc.setTextoL(vrc.getLabel6(),"No es posible hacer una recomendación");
+                
+           vrc.setTexto(vrc.getTextArea1(),"N/A");
+       }
 
 }
 
@@ -193,12 +253,13 @@ public void ritmo(){
 /*Menu entrenador*/
 
 public void mostrarNuevoEntrenador(){
+    nuevoe = new NuevoEntrenador();
     nuevoe.setLocationRelativeTo(null);
     nuevoe.setVisible(true);
 }
 
 public void mostrarListaEnt(){
-    
+    listaE= new ListaEntrenadores();
     listaE.mostrarLista();
     listaE.setLocationRelativeTo(null);
     listaE.setVisible(true);   
@@ -214,35 +275,86 @@ public void rutina(){
 /*nuevo entrenador*/
 
 public void crearEnt(){
-    //captacion de datos
-    //sexo
+    Lab1.error="";
      char sexo = 'F';
-        int tipoejer=1;
-        int ced = Integer.parseInt(nuevoe.getTexto(nuevoe.getTextField3()));
-        String nombre =nuevoe.getTexto(nuevoe.getTextField1());
-        int edad = Integer.parseInt(nuevoe.getTexto(nuevoe.getTextField2()));
+        int tipoejer=1, ced=0, exp=0, edad=0;
+        double peso=0, alt=0;
+        String nombre="", esp="";
+        try{
+            //cedula
+        try{if (v.validarCedula(nuevoe.getTexto(nuevoe.getTextField3()))){
+            ced = Integer.parseInt(nuevoe.getTexto(nuevoe.getTextField3()));
+        }}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"CEDULA INVALIDA";}
+        catch (NumberFormatException n){Lab1.error=Lab1.error+System.lineSeparator()+"CEDULA INVALIDA";}
         
+        //EDAD
+        try{
+            if (v.validarNum(nuevoe.getTexto(nuevoe.getTextField2()),"1,3", 18, 100))
+                    {
+            edad = Integer.parseInt(nuevoe.getTexto(nuevoe.getTextField2()));}}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"EDAD INVALIDA";}
+        catch (NumberFormatException n){Lab1.error=Lab1.error+System.lineSeparator()+"EDAD INVALIDA";}
+        //sexo (no requiere validacion)
         if (nuevoe.getCombo(nuevoe.getComboBox1())=="M"){
              sexo = 'M';
         }
+        //PESO/ALTURA
+        try{if (v.validarNum(nuevoe.getTexto(nuevoe.getTextField4()),"1,3", 1, 500))
+                    {peso=Double.parseDouble(nuevoe.getTexto(nuevoe.getTextField4()));}}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"PESO INVALIDO";
+     }
+        catch (NumberFormatException n){Lab1.error=Lab1.error+System.lineSeparator()+"PESO INVALIDO";}
+        try{if (v.validarNum(nuevoe.getTexto(nuevoe.getTextField5()),"1,3", 1, 400))
+                    {alt=Double.parseDouble(nuevoe.getTexto(nuevoe.getTextField5()));}}
+        catch (ExcepcionPropia e){Lab1.error=Lab1.error+System.lineSeparator()+"ALTURA INVALIDA";}
+        catch (NumberFormatException n){Lab1.error=Lab1.error+System.lineSeparator()+"ALTURA INVALIDA";}
+     
         
-        double peso=Double.parseDouble(nuevoe.getTexto(nuevoe.getTextField4()));
-        double alt=Double.parseDouble(nuevoe.getTexto(nuevoe.getTextField5()));
+                //nombre
+        try{
+            if(v.validarString(nuevoe.getTexto(nuevoe.getTextField1()),20)){
+            nombre =nuevoe.getTexto(nuevoe.getTextField1());};}
+        catch(ExcepcionPropia excepcionnom){
+            Lab1.error=Lab1.error+System.lineSeparator()+"NOMBRE INVALIDO";}
         
-        String esp = nuevoe.getTexto(nuevoe.getTextField6());
-        int exp = Integer.parseInt(nuevoe.getTexto(nuevoe.getTextField7()));
-    
+        //especialidad
+        try{
+            if(v.validarString(nuevoe.getTexto(nuevoe.getTextField6()), 30)){
+                    esp = nuevoe.getTexto(nuevoe.getTextField6());}}
+            catch (ExcepcionPropia excepcionesp){
+                    Lab1.error=Lab1.error+System.lineSeparator()+"ESPECIALIDAD DEMASIADO LARGA";
+                    }        
+        //EXP
+        try{exp = Integer.parseInt(nuevoe.getTexto(nuevoe.getTextField7()));}
+        catch(NumberFormatException excepcionnum){Lab1.error=Lab1.error+System.lineSeparator()+"EXPERIENCIA INVALIDA";
+     }}
+        
+    catch(NullPointerException hmm){}
         //creando el entrenador
+finally{
+    if (Lab1.error==""){//no hubo excepciones
+        
     Entrenador e = new Entrenador(exp, esp, ced, nombre,  edad, sexo,  peso,  alt);
-    Lab1.lista.agregarLista(e);
-}
+    Lab1.lista.agregarLista(e);}
+    else{
+        error.setTexto(error.getTextArea1(),"ERRORES: "+Lab1.error);
+     
+     error.setVisible(true);}
+}}
       
 
 /*rutina*/
-public void detRut(){
+public void detRut() throws NullPointerException{
 rutinav=new Rutina();
 rutinav.setLocationRelativeTo(null);
-       rutinav.setTexto(rutinav.getTextArea1(),rutinav.genRutinaObj());
+       try{rutinav.setTexto(rutinav.getTextArea1(),rutinav.genRutinaObj());}
+       catch (NullPointerException excepcion8){Lab1.error=Lab1.error+System.lineSeparator()+"Cedula Invalida";
+            error.setTexto(error.getTextArea1(),Lab1.error); 
+            error.setVisible(true);
+            rutinav.setTexto(rutinav.getTextArea1(),"No es posible mostrar la rutina recomendada");
+       }
+       
        
 
 }
@@ -252,7 +364,7 @@ rutinav.setLocationRelativeTo(null);
 public void mostrarListaE(){
 
                            //busqueda en lista
-               String a= Lab1.lista.retornarDeportista();
+               String a= Lab1.lista.retornarEntrenador();
 
 listaE.setTexto(listaE.getTextArea1(),a);
 }
@@ -264,7 +376,7 @@ public void cedula() throws NumberFormatException{
     int a=0;
      try{a= Integer.parseInt(cedv.getTexto(cedv.getTextField3()));}
      catch(NumberFormatException excepcion1){
-     System.out.println("Caracter invalido1");
+         Lab1.error="";
      error.setTexto(error.getTextArea1(),"ERROR: CARACTER INVALIDO");
      
      error.setVisible(true);}
@@ -298,8 +410,5 @@ public void cedula() throws NumberFormatException{
 
 }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 }

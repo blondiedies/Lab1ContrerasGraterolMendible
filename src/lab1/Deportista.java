@@ -65,7 +65,6 @@ public class Deportista extends Persona{
  			return false;
     }
     public String imprimirGrasaCorp(){
-        System.out.println("Grasa corporal: "+ calcularIMC());
         switch (getSexo()){
 
             case 'F': 
