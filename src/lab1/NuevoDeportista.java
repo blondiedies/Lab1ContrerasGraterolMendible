@@ -296,7 +296,7 @@ dispose();
         /*Validaciones y captacion de datos*/      
         Lab1.c.crearDep();              
         dispose();
-        Lab1.c.mostrarNuevoDeportista();        // TODO add your handling code here:
+        Lab1.c.mostrarMenuDeportista();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 //para obtener los textfields
     public String getTexto(javax.swing.JTextField textbox){

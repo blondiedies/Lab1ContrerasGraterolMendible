@@ -21,11 +21,27 @@ public class IMC extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void calcularIMC(){
+    public String calcularIMC ()throws NullPointerException{
+        String indice="",valor="",stringf="Error Invalido";
+        Deportista d=null;
                         //busqueda en lista
-                        Lab1.c.calcIMC();
-        
-        
+    try {d = (Deportista) Lab1.lista.buscarEnLista(Lab1.cedulatemp);
+   
+                //calculo del imc
+                int IMC = (int) (d.getPeso()/(d.getAltura()*d.getAltura()/10000));
+                indice=String.valueOf(IMC);
+                valor=String.valueOf(d.calcularIMC());}
+    catch (NullPointerException excepcion2){
+     System.out.println("Caracter invalido2");   
+    }
+
+    try{stringf="IMC: "+indice+"; Porcentaje de grasa: "+valor+"; Estado del deportista: "+d.imprimirGrasaCorp();}
+    catch (NullPointerException excepcion3){
+     System.out.println("Caracter invalido2");   
+    }
+    
+     return stringf;
+    
     }
     
     public void setTexto(javax.swing.JTextArea area, String texto){

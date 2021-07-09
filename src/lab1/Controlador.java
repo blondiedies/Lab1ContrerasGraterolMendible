@@ -17,7 +17,10 @@ public class Controlador  implements ActionListener {
     private Deportista d;
     private Entrenador e;
     private Gimnasio g;
-    private NuevoDeportista nuevod;
+    private MenuPrincipal menuP;
+    private MenuDeportista menuD;
+    private MenuEntrenador menuE;
+    private NuevoDeportista nuevod  ;
     private NuevoEntrenador nuevoe;
     private  IMC indicem;
     private RitmoCardiaco vrc;
@@ -25,6 +28,8 @@ public class Controlador  implements ActionListener {
     private VentanaCedula cedv;
     private ListaDeportistas listaD;  
     private ListaEntrenadores listaE;
+    private VentanaError error= new VentanaError();
+    
 
     public Controlador() {
     }
@@ -58,15 +63,21 @@ public void setGimnasio(Gimnasio g) {
 /*general*/
 
 public void mostrarMenuPpal(){
-        new MenuPrincipal().setVisible(true);}
+    menuP= new MenuPrincipal();
+    menuP.setLocationRelativeTo(null);
+        menuP.setVisible(true);}
 
 /*Menu PPAL*/
 public void mostrarMenuEntrenador() {
-  new MenuEntrenador().setVisible(true);
+  menuE=new MenuEntrenador();
+  menuE.setLocationRelativeTo(null);
+  menuE.setVisible(true);
 }
 
 public void mostrarMenuDeportista() {
-  new MenuDeportista().setVisible(true);
+  menuD=new MenuDeportista();
+    menuD.setLocationRelativeTo(null);
+  menuD.setVisible(true);
 }
 /*------------*/
 /*Menu Deportista*/
@@ -74,22 +85,26 @@ public void mostrarMenuDeportista() {
 public void ritmoCardiaco(){
     Lab1.check=2;
     cedv=new VentanaCedula();
+    cedv.setLocationRelativeTo(null);
         cedv.setVisible(true);   
 }
 
 public void MostrarListaDeportistas(){
     listaD=new ListaDeportistas();
     listaD.mostrarLista();
+    listaD.setLocationRelativeTo(null);
     listaD.setVisible(true); 
 }
 
 public void IMC(){
     Lab1.check=1;
     cedv=new VentanaCedula();
+    cedv.setLocationRelativeTo(null);
     cedv.setVisible(true);
 }
 public void mostrarNuevoDeportista() {
     nuevod=new NuevoDeportista();
+    nuevod.setLocationRelativeTo(null);
     nuevod.setVisible(true);
  
 }
@@ -148,15 +163,9 @@ listaD.setTexto(listaD.getTextArea1(),a);
 
 /*IMC*/
 public void calcIMC(){
-    Deportista d = (Deportista) Lab1.lista.buscarEnLista(Lab1.cedulatemp);
-   
-                //calculo del imc
-                int IMC = (int) (d.getPeso()/(d.getAltura()*d.getAltura()/10000));
-                String indice=String.valueOf(IMC);
-                String valor=String.valueOf(d.calcularIMC());
-
-                indicem.setTexto(indicem.getTextArea1(), "IMC: "+indice+"; Porcentaje de grasa: "+valor+"; Estado del deportista: "+d.imprimirGrasaCorp());
-       
+    indicem=new IMC();
+    indicem.setLocationRelativeTo(null);
+    indicem.setTexto(indicem.getTextArea1(),indicem.calcularIMC());
 }
 
 /*Ritmo Cardiaco*/
@@ -184,18 +193,22 @@ public void ritmo(){
 /*Menu entrenador*/
 
 public void mostrarNuevoEntrenador(){
+    nuevoe.setLocationRelativeTo(null);
     nuevoe.setVisible(true);
 }
 
 public void mostrarListaEnt(){
     
     listaE.mostrarLista();
+    listaE.setLocationRelativeTo(null);
     listaE.setVisible(true);   
 }
 
 public void rutina(){
     Lab1.check=3;
-        new VentanaCedula().setVisible(true); 
+    cedv = new VentanaCedula();
+        cedv.setLocationRelativeTo(null);
+        cedv.setVisible(true);
 }
 
 /*nuevo entrenador*/
@@ -227,13 +240,9 @@ public void crearEnt(){
 
 /*rutina*/
 public void detRut(){
-    Deportista d = (Deportista) Lab1.lista.buscarEnLista(Lab1.cedulatemp);
-        Entrenador e = new Entrenador();
-                //rutina y objetivos
-        String a="Grasa corporal: "+d.calcularIMC()+"%; Tipo de ejercicio: "+d.tipoEjerString()+System.lineSeparator()+e.determinarRutina(d.calcularIMC(), d.tipoEjerString());
-        String b=System.lineSeparator()+"Objetivos: "+e.determinarRutina(d.tipoEjerString(),d.calcularIMC());
-       
-       rutinav.setTexto(rutinav.getTextArea1(),a+b);
+rutinav=new Rutina();
+rutinav.setLocationRelativeTo(null);
+       rutinav.setTexto(rutinav.getTextArea1(),rutinav.genRutinaObj());
        
 
 }
@@ -251,25 +260,37 @@ listaE.setTexto(listaE.getTextArea1(),a);
 
 /*ventana cedula*/
 
-public void cedula(){
-     int a = Integer.parseInt(cedv.getTexto(cedv.getTextField3()));
+public void cedula() throws NumberFormatException{
+    int a=0;
+     try{a= Integer.parseInt(cedv.getTexto(cedv.getTextField3()));}
+     catch(NumberFormatException excepcion1){
+     System.out.println("Caracter invalido1");
+     error.setTexto(error.getTextArea1(),"ERROR: CARACTER INVALIDO");
+     
+     error.setVisible(true);}
+    
+     
         Lab1.cedulatemp=a;
         //para determinar a cual ventana se sigue
         switch (Lab1.check){
             case 1: //imc
-                indicem.calcularIMC();
+                calcIMC();
+                indicem.setLocationRelativeTo(null);
                 indicem.setVisible(true);
              
                 break;
         
             case 2: //ritmo cardiaco
+                vrc= new RitmoCardiaco();
                 vrc.ritmoCard();
+                vrc.setLocationRelativeTo(null);
                 vrc.setVisible(true);
                 
                 break;
             
             case 3: //rutina entrenador
-                rutinav.genRutinaObj();
+                detRut();
+                rutinav.setLocationRelativeTo(null);
                 rutinav.setVisible(true);
                
         }

@@ -27,7 +27,12 @@ public class Lab1 {
         lista.agregarLista(entrenador);        
       
         c.mostrarMenuPpal();
-       new Validaciones().validarCedula("27615745");
+        //probando las validaciones
+        boolean validarCedula = new Validaciones().validarCedula("29000000");
+        System.out.println(validarCedula);
+        
+        boolean nombrev = new Validaciones().validarString("Angelica Schuyler Jrr",20);
+        System.out.println(nombrev);
 	}
 }
 
